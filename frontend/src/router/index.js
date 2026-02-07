@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../store/auth";
-import Home from "../views/Home.vue";
+import TopGames from "../views/TopGames.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
 import Reviews from "../views/Reviews.vue";
+import NewsPage from "../views/News.vue";
 
 const routes = [
-  { path: "/", name: "Home", component: Home },
+  { path: "/", name: "News", component: NewsPage },
   { path: "/login", name: "Login", component: Login },
   {
     path: "/profile",
@@ -19,6 +20,16 @@ const routes = [
     name: "Reviews",
     component: Reviews,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/",
+    name: "News",
+    component: NewsPage,
+  },
+  {
+    path: "/top-games",
+    name: "TopGames",
+    component: TopGames,
   },
 ];
 

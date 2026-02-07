@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
-    <h1>Trending Games</h1>
-    <div v-if="loading">Loading games data...</div>
+  <div class="top-games">
+    <h1>Top Rated Games</h1>
+    <div v-if="loading">Loading top games...</div>
     <div v-else class="games-grid">
       <div v-for="game in games" :key="game.id" class="game-card">
         <img :src="game.background_image" :alt="game.name" class="game-img" />
         <div class="game-info">
           <h3>{{ game.name }}</h3>
-          <p>Rating: {{ game.rating }} / 5</p>
+          <p class="rating">⭐ {{ game.rating }} / 5</p>
           <p>Released: {{ game.released }}</p>
         </div>
       </div>
@@ -24,10 +24,10 @@ const loading = ref(true);
 
 onMounted(async () => {
   try {
-    const res = await api.get("/api/news");
+    const res = await api.get("/api/news/top-rated");
     games.value = res.data;
   } catch (error) {
-    console.error("Failed to load news", error);
+    console.error("Failed to load top games", error);
   } finally {
     loading.value = false;
   }

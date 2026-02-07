@@ -1,8 +1,5 @@
 const User = require("../models/User");
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
 const getUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
@@ -14,20 +11,15 @@ const getUserProfile = async (req, res, next) => {
       throw new Error("User not found");
     }
   } catch (err) {
-    // Передаем ошибку в errorMiddleware
     next(err);
   }
 };
 
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
 const updateUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
 
     if (user) {
-      // 1. Проверка уникальности username
       if (req.body.username && req.body.username !== user.username) {
         const usernameExists = await User.findOne({
           username: req.body.username,
@@ -38,8 +30,6 @@ const updateUserProfile = async (req, res, next) => {
         }
         user.username = req.body.username;
       }
-
-      // 2. Проверка уникальности email
       if (req.body.email && req.body.email !== user.email) {
         const emailExists = await User.findOne({ email: req.body.email });
         if (emailExists) {
@@ -49,7 +39,6 @@ const updateUserProfile = async (req, res, next) => {
         user.email = req.body.email;
       }
 
-      // 3. Обновление пароля
       if (req.body.password) {
         user.password = req.body.password;
       }
@@ -66,7 +55,6 @@ const updateUserProfile = async (req, res, next) => {
       throw new Error("User not found");
     }
   } catch (err) {
-    // Передаем ошибку в errorMiddleware
     next(err);
   }
 };
