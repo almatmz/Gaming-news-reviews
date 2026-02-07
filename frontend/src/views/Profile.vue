@@ -11,7 +11,7 @@
       <label>Email</label>
       <input v-model="profile.email" type="email" />
 
-      <label>New Password (Optional)</label>
+      <label>New Password</label>
       <input
         v-model="password"
         type="password"
