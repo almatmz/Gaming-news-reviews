@@ -20,7 +20,7 @@ export const useAuthStore = defineStore("auth", {
     },
     setAuth(data) {
       this.token = data.token;
-      this.user = data; // In a real app, you might decode the token or fetch profile immediately
+      this.user = data;
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data));
     },
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      window.location.reload(); // Simple way to reset state
+      window.location.reload();
     },
   },
 });
